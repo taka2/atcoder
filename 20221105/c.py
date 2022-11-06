@@ -1,29 +1,23 @@
 # -*- coding: utf-8 -*-
-def searchMax(p, index, max):
-    maxValue = 0
-    resultIndex = 0
-    for i in range(index, len(p)):
-        if(p[i] > maxValue and p[i] < max):
-            maxValue = p[index]
-            result = index
-
-    return resultIndex
+def prev_permutation(a: list, l: int = 0, r: int = None) -> bool:
+    if r is None:
+        r = len(a) - 1
+    for i in range(r - 1, l - 1, -1):
+        if a[i] > a[i + 1]:
+            for j in range(r, i, -1):
+                if a[i] > a[j]:
+                    a[i], a[j] = a[j], a[i]
+                    p, q = i + 1, r
+                    while p < q:
+                        a[p], a[q] = a[q], a[p]
+                        p += 1
+                        q -= 1
+                    return True
+    return False
 
 # 整数の入力
 n = int(input())
 p = list(map(int, input().split()))
 
-baseList = list(range(n+1))
-baseList.pop(0)
-
-for i in range(len(p)):
-    index = len(p) - i-1
-    preIndex = index -1
-    
-    if(p[preIndex] > p[index]):
-        max = searchMax(p, index, p[preIndex])
-        tmp = p[preIndex]
-        p[preIndex] = p[index]
-        p[index] = tmp
-
-print(p)
+prev_permutation(p)
+print(" ".join(map(str, p)))
