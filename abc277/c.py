@@ -21,14 +21,12 @@ for i in range(n):
     if ladder[0] not in ladders:
         ladders[ladder[0]] = [ladder[1]]
     else:
-        if ladder[1] not in ladders[ladder[0]]:
-            ladders[ladder[0]].append(ladder[1])
+        ladders[ladder[0]].append(ladder[1])
 
     if ladder[1] not in ladders:
         ladders[ladder[1]] = [ladder[0]]
     else:
-        if ladder[0] not in ladders[ladder[1]]:
-            ladders[ladder[1]].append(ladder[0])
+        ladders[ladder[1]].append(ladder[0])
 
 addPositions(1)
 print(max(list(positions.keys())))
