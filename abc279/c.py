@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
 def countSharp(s):
     return s.count('#')
 
@@ -11,9 +12,24 @@ for i in range(H):
 for j in range(H):
     T.append(input())
 
+counterS = defaultdict(int)
+counterT = defaultdict(int)
+for i in range(W):
+    columnS = ""
+    columnT = ""
+    for j in range(H):
+        columnS += S[j][i]
+        columnT += T[j][i]
+    counterS[columnS] += 1
+    counterT[columnT] += 1
+
+if len(counterS) != len(counterT):
+    print("No")
+    exit(0)
+
 result = True
-for i in range(H):
-    if countSharp(S[i]) != countSharp(T[i]):
+for i in counterS:
+    if i not in counterT or counterS[i] != counterT[i]:
         result = False
         break
 
