@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import math
-
 def factorization(n):
     arr = []
     temp = n
@@ -22,27 +20,26 @@ def factorization(n):
 
 k = int(input())
 fact = factorization(k)
-loopCount = 1
-for i in fact:
-    #print(i)
-    loopCount *= (i[1]+1)
 
-values = []
-for i in range(loopCount):
-    #print("i=",i)
-    value = 1
-    tmpi = i
-    for j in range(len(fact)):
-        indexJ = tmpi % (fact[j][1]+1)
-        tmpi //= (fact[j][1]+1)
-        value *= fact[j][0] ** indexJ
-        #print("indexJ=", indexJ, "value=", value)
-    values.append(value)
+def f(n,p):
+    if n == 0:
+        return 0
+    n = n // p
+    return n + f(n,p)
 
-sortedValues = sorted(values)
-#print(sortedValues)
+ac=k
+wa=0
+while(ac-wa > 1):
+    wj = (ac+wa)//2
+    ok = True
+    for elem in fact:
+        p = elem[0]
+        cnt = elem[1]
+        if(f(wj,p) < cnt):
+            ok = False
+    if ok:
+        ac = wj
+    else:
+        wa = wj
 
-for i in range(len(sortedValues)):
-    if sortedValues[i] >= k and sortedValues % k == 0:
-        print(sortedValues[i])
-        break
+print(ac)
