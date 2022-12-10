@@ -30,4 +30,7 @@ for i in range(1, n-m+1):
     elif sum > max:
         max = sum
 
+if max == None:
+    max = a[0]
+
 print(max)
