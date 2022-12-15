@@ -31,6 +31,6 @@ for i in range(1, n-m+1):
         max = sum
 
 if max == None:
-    max = a[0]
+    max = firstsum
 
 print(max)
