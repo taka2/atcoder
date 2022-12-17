@@ -3,9 +3,5 @@ import itertools
 
 n,m = map(int, input().split())
 
-baselist = []
-for i in range(m):
-    baselist.append(i+1)
-
-for combi in itertools.combinations(baselist, n):
+for combi in itertools.combinations(range(1,m+1), n):
     print(" ".join(list(map(str, combi))))
