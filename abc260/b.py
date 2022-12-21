@@ -5,56 +5,52 @@ A = list(map(int, input().split()))
 # 英語の点数
 B = list(map(int, input().split()))
 
+# 数学の点数リスト
+mathList = []
+for i in range(N):
+    mathList.append((i+1, A[i]))
+mathList = sorted(mathList, key=lambda x: x[1], reverse=True)
+#print(mathList)
+
+# 英語の点数リスト
+englishList = []
+for i in range(N):
+    englishList.append((i+1, B[i]))
+englishList = sorted(englishList, key=lambda x: x[1], reverse=True)
+#print(englishList)
+
+# 合計点のリスト
+totalList = []
+for i in range(N):
+    totalList.append((i+1, A[i] + B[i]))
+totalList = sorted(totalList, key=lambda x: x[1], reverse=True)
+#print(totalList)
+
 resultList = []
-# 1.数学の点が高い方から X 人を合格とする。
-if X != 0:
-    mathOKPoints = sorted(A)[N-X:N]
-    result1 = 0
-    for i in range(N):
-        if A[i] in mathOKPoints:
-            result1 += 1
-            resultList.append(i+1)
-            #print("1:", i+1)
-        if result1 == X:
-            break
+for i in range(X):
+    targetNumber = mathList[i][0]
+    resultList.append(targetNumber)
+#print(resultList)
 
-# 2.次に、この時点でまだ合格となっていない受験者のうち、英語の点が高い方から Y 人を合格とする。
-if Y != 0:
-    englishPoints = []
-    for i in range(N):
-        if (i+1) not in resultList:
-            englishPoints.append(B[i])
-        else:
-            englishPoints.append(-1)
-    englishOKPoints = sorted(englishPoints)[len(englishPoints)-Y:len(englishPoints)]
-    print(englishOKPoints)
-    result2 = 0
-    for i in range(N):
-        if (i+1) not in resultList and englishPoints[i] in englishOKPoints:
-            result2 += 1
-            resultList.append(i+1)
-            #print("2:", i+1)
-        if result2 == Y:
-            break
+countY = 0
+for i in range(N):
+    if countY == Y:
+        break
+    targetNumber = englishList[i][0]
+    if targetNumber not in resultList:
+        resultList.append(targetNumber)
+        countY += 1
+#print(resultList)
 
-# 3.次に、この時点でまだ合格となっていない受験者のうち、数学と英語の合計点が高い方から Z 人を合格とする。
-if Z != 0:
-    sumPoints = []
-    for i in range(N):
-        if (i+1) not in resultList:
-            sumPoints.append(A[i] + B[i])
-        else:
-            sumPoints.append(-1)
-    sumOKPoints = sorted(sumPoints)[len(sumPoints)-Z:len(sumPoints)]
-    print("sumOKPoints",sumOKPoints)
-    result3 = 0
-    for i in range(N):
-        if (i+1) not in resultList and sumPoints[i] in sumOKPoints:
-            result3 += 1
-            resultList.append(i+1)
-            #print("3:", i+1)
-        if result3 == Z:
-            break
+countZ = 0
+for i in range(N):
+    if countZ == Z:
+        break
+    targetNumber = totalList[i][0]
+    if targetNumber not in resultList:
+        resultList.append(targetNumber)
+        countZ += 1
+#print(resultList)
 
 for i in sorted(resultList):
     print(i)
