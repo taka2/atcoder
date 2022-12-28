@@ -18,7 +18,4 @@ for i in range(N, 1, -1):
     Red[i-1] += blueCount
     Blue[i-1] = blueCount * Y
 
-if 1 in Blue:
-    print(Blue[1])
-else:
-    print(0)
+print(Blue[1])
