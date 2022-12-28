@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
 N,X,Y = map(int, input().split())
 
-Red = {N:1}
-Blue = {}
+Red = defaultdict(int)
+Red[N] = 1
+Blue = defaultdict(int)
 
 currentLevel = N
 for i in range(N, 1, -1):
     # 赤い宝石の処理
     redCount = Red[i]
     Red[i-1] = redCount
-    if i in Blue:
-        Blue[i] += redCount * X
-    else:
-        Blue[i] = redCount * X
+    Blue[i] += redCount * X
 
     # 青い宝石の処理
     blueCount = Blue[i]
