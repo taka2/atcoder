@@ -20,41 +20,16 @@ def getValueFromZahyoList(zahyoList):
         resultValue += (value * 10**(N-i-1))
     return resultValue
 
+directions = [(-1,0), (1,0), (0,-1), (0,1), (-1,-1), (-1,1), (1,-1), (1,1)]
 result = 0
 for i in range(N):
     for j in range(N):
         baseZahyo = (i,j)
-        upZahyoList = getZahyoList(baseZahyo, -1, 0)
-        upValue = getValueFromZahyoList(upZahyoList)
-        if upValue > result:
-            result = upValue
-        downZahyoList = getZahyoList(baseZahyo, 1, 0)
-        downValue = getValueFromZahyoList(downZahyoList)
-        if downValue > result:
-            result = downValue
-        leftZahyoList = getZahyoList(baseZahyo, 0, -1)
-        leftValue = getValueFromZahyoList(leftZahyoList)
-        if leftValue > result:
-            result = leftValue
-        rightZahyoList = getZahyoList(baseZahyo, 0, 1)
-        rightValue = getValueFromZahyoList(rightZahyoList)
-        if rightValue > result:
-            result = rightValue
-        upLeftZahyoList = getZahyoList(baseZahyo, -1, -1)
-        upLeftValue = getValueFromZahyoList(upLeftZahyoList)
-        if upLeftValue > result:
-            result = upLeftValue
-        upRightZahyoList = getZahyoList(baseZahyo, -1, 1)
-        upRightValue = getValueFromZahyoList(upRightZahyoList)
-        if upRightValue > result:
-            result = upRightValue
-        downLeftZahyoList = getZahyoList(baseZahyo, 1, -1)
-        downLeftValue = getValueFromZahyoList(downLeftZahyoList)
-        if downLeftValue > result:
-            result = downLeftValue
-        downRightZahyoList = getZahyoList(baseZahyo, 1, 1)
-        downRightValue = getValueFromZahyoList(downRightZahyoList)
-        if downRightValue > result:
-            result = downRightValue
+        for k in range(len(directions)):
+            direction = directions[k]
+            zahyoList = getZahyoList(baseZahyo, direction[0], direction[1])
+            value = getValueFromZahyoList(zahyoList)
+            if value > result:
+                result = value
 
 print(result)
