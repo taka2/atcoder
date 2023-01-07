@@ -20,7 +20,7 @@ for i in range(H):
 for i in range(N):
     x = XY[i][0]
     y = XY[i][1]
-    X[x-1][y-1] = 1
+    X[y-1][x-1] = 1
 
 # 横方向の累積和
 Xsum = [[0] * (W+1)]
@@ -41,4 +41,4 @@ for i in range(H+1):
 Q = int(input())
 for i in range(Q):
     A,B,C,D = map(int, input().split())
-    print(Xsum[C][D] + Xsum[A-1][B-1] - Xsum[A-1][D] - Xsum[C][B-1])
+    print(Xsum[D][C] + Xsum[B-1][A-1] - Xsum[D][A-1] - Xsum[B-1][C])
