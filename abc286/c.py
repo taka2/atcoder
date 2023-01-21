@@ -2,13 +2,14 @@
 N,A,B = map(int, input().split())
 S = input()
 
-def hantei(S):
+ans = 10**9 * 5000 * 5000
+for i in range(N):
+    Ayen = A * i
     count = 0
-    for i in range(len(S)//2):
-        if S[i] != S[len(S)-i-1]:
+    for j in range(N//2):
+        if S[(j+i+N)%N] != S[(N-1+i-j)%N]:
             count += 1
-    return count
+    Byen = B * count
+    ans = min(ans, Ayen+Byen)
 
-hoge = hantei(S)
-while hoge != 0:
-    pass
+print(ans)
