@@ -3,7 +3,7 @@ S = input()
 T = input()
 
 def hantei(sindex, tindex):
-    if S[sindex] == '?' or T[tindex] == '?' or [sindex] == T[tindex]:
+    if S[sindex] == '?' or T[tindex] == '?' or S[sindex] == T[tindex]:
         return True
     else:
         return False
