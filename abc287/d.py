@@ -2,46 +2,38 @@
 S = input()
 T = input()
 
-def hantei(sindex, tindex):
-    if S[sindex] == '?' or T[tindex] == '?' or S[sindex] == T[tindex]:
+def hantei(a, b):
+    if a == '?' or b == '?' or a == b:
         return True
     else:
         return False
 
-lenT = len(T)
-prevOk = -1
-for i in range(lenT+1):
-    ans = True
-    if prevOk == -1:
-        prevOk = 0
-        # 初回ループ
-        startIndex = i-lenT
-        for j in range(lenT-i):
-            if hantei(startIndex+j, j):
-                prevOk += 1
-            else:
-                ans = False
+pre = [True]
+suf = [True]
+
+preMatch = True
+for i in range(len(T)):
+    if preMatch and hantei(S[i], T[i]):
+        pass
     else:
-        # 二周目以降
-        Ok = prevOk
-        # 新たに判定に加わる
-        if hantei(i-1, i-1):
-            Ok += 1
-        else:
-            Ok -= 1
+        preMatch = False
+    pre.append(preMatch)
 
-        # 判定から外れる
-        sindex = i-lenT-1
-        if hantei(sindex, i-1):
-            Ok -= 1
-        else:
-            Ok += 1
+reverseS = S[::-1]
+reverseT = T[::-1]
 
-        if Ok != lenT:
-            ans = False
-        prevOk = Ok
+sufMatch = True
+for i in range(len(T)):
+    if sufMatch and hantei(reverseS[i], reverseT[i]):
+        pass
+    else:
+        sufMatch = False
+    suf.append(sufMatch)
 
-    if(ans):
+for x in range(len(T)+1):
+    preLength = x
+    sufLength = len(T) - x
+    if pre[preLength] and suf[sufLength]:
         print("Yes")
     else:
         print("No")
