@@ -10,7 +10,7 @@ for i in range(N):
     (s,t) = list[i]
     sflag = True
     tflag = True
-    for j in range(i,N):
+    for j in range(N):
         if i == j:
             continue
         (s1,t1) = list[j]
