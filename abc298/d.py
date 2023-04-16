@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
+from collections import deque
+
+MOD = 998244353
+
 Q = int(input())
 
-S = [1]
-index = 0
+S = deque([1])
+ans = 1
 
 for i in range(Q):
     query = input().split()
     if query[0] == '1':
-        x = query[1]
-        S.append(int(x))
+        x = int(query[1])
+        ans = (ans * 10 + x) % MOD
+        S.append(x)
     elif query[0] == '2':
-        index += 1
+        t = S.popleft()
+        keta = pow(10, len(S), MOD)
+        ans -= t*keta
+        ans %= MOD
     elif query[0] == '3':
-        slicedS = S[index:]
-        value = 0
-        keta = 1
-        for i in range(len(slicedS)-1, -1, -1):
-            value += int(slicedS[i]) * keta
-            keta *= 10
-        print(int(value % 998244353))
+        print(ans % MOD)
