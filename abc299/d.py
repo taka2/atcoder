@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 N = int(input())
 
-for i in range(2,min(N+1,12)):
-    print("?",i)
-    Si = int(input())
-    if Si == 1:
-        print("!",(i-1))
-        exit(0)
+l = 1
+r = N
 
-for i in range(N-1,max(N-11,0),-1):
-    print("?",i)
-    Si = int(input())
-    if Si == 0:
-        print("!",i)
-        exit(0)
+ans = -1
+while(l<=r):
+    m = (l+r)//2
+    print("?",m)
+    X = int(input())
+    if m == l+1 and X == 1:
+        ans = m-1
+        break
+    elif m == r-1 and X == 0:
+        ans = m
+        break
+    elif X == 1:
+        r = m
+    elif X == 0:
+        l = m
+
+print("!",ans)
