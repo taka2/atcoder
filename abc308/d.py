@@ -2,6 +2,9 @@
 import sys
 sys.setrecursionlimit(10000000)
 
+dx = [0,0,1,-1]
+dy = [1,-1,0,0]
+
 H,W = map(int, input().split())
 S = []
 for i in range(H):
@@ -15,24 +18,18 @@ def getNextCh(ch):
 
 def dfs(posx, posy, currentch):
     visited[posy][posx] = True
-
-    if posx == (W-1) and posy == (H-1):
-        return
-
     nextCh = getNextCh(currentch)
 
-    # Up
-    if (posy - 1) > 0 and not visited[posy-1][posx] and S[posy-1][posx] == nextCh:
-        dfs(posx, posy-1, nextCh)
-    # Down
-    if (posy + 1) < H and not visited[posy+1][posx] and S[posy+1][posx] == nextCh:
-        dfs(posx, posy+1, nextCh)
-    # Left
-    if (posx - 1) > 0 and not visited[posy][posx-1] and S[posy][posx-1] == nextCh:
-        dfs(posx-1, posy, nextCh)
-    # Right
-    if (posx + 1) < W and not visited[posy][posx+1] and S[posy][posx+1] == nextCh:
-        dfs(posx+1, posy, nextCh)
+    for k in range(4):
+        nx = posx + dx[k]
+        ny = posy + dy[k]
+        if (ny < 0 or ny >= H or nx < 0 or nx >= W):
+            continue
+        if S[ny][nx] != nextCh:
+            continue
+        if visited[ny][nx]:
+            continue
+        dfs(nx,ny,nextCh)
 
 if S[0][0] != 's':
     print("No")
