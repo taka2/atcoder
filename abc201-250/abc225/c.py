@@ -12,11 +12,11 @@ for i in range(N):
     if len(amariFirstRow) == 0:
         # 先頭行
         for j in range(M):
-            amariFirstRow.append(B[i][j] % 7)
+            amariFirstRow.append((B[i][j]-1) % 7)
 
     amariPrevColumn = -1
     for j in range(M):
-        amari = B[i][j] % 7
+        amari = (B[i][j]-1) % 7
         if amari != amariFirstRow[j]:
             # 先頭行の余りと合致していない
             ans = False
