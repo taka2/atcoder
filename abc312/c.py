@@ -5,52 +5,24 @@ N,M = map(int, input().split())
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
 
-mapA = defaultdict(int)
-mapB = defaultdict(int)
-
+events = []
 for i in range(N):
-    mapA[A[i]] += 1
+    events.append((A[i], 0))
+for j in range(M):
+    events.append((B[j]+1, 1))
 
-for i in range(M):
-    mapB[B[i]] += 1
+sortedEvents = sorted(events)
 
-sumA = []
-countA = 0
-for mapAKey in sorted(mapA):
-    countA += mapA[mapAKey]
-    sumA.append((mapAKey, countA))
-
-sumB = []
-countB = 0
-for mapBKey in sorted(mapB, reverse=True):
-    countB += mapB[mapBKey]
-    sumB.append((mapBKey, countB))
-
-i = 0
-j = 0
-kai = 0
-uri = 0
-price = 0
-
-while True:
-    if i == len(sumA) and j == len(sumB):
-        break
-    if i == len(sumA):
-        i = len(sumA)-1
-    if j == len(sumB):
-        j = len(sumB)-1
-    sumAi = sumA[i]
-    sumBj = sumB[j]
-    if sumAi[0] <= sumBj[0]:
-        uri += sumAi[1]
-        i += 1
-        kai += sumBj[1]
-        j += 1
-        price = sumAi[0]
+na = 0
+nb = M
+for event in sortedEvents:
+    p = event[0]
+    t = event[1]
+    if t == 0:
+        na += 1
     else:
-        break
-
-if price == 0 or kai > uri:
-    print(sumB[0][0]+1)
-else:
-    print(price)
+        nb -= 1
+    
+    if (na >= nb):
+        print(p)
+        exit(0)
