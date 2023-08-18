@@ -4,7 +4,7 @@ X = int(input())
 ans = 0
 money = 100
 while money < X:
-    money = int(money * 1.01)
+    money = money + money // 100
     ans += 1
 
 print(ans)
