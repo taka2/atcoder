@@ -3,19 +3,12 @@ N = int(input())
 H = list(map(int, input().split()))
 
 ans = True
-prev = False
-for i in range(N-1):
-    if H[i] - H[i+1] >= 2:
+for i in range(N-1, 0, -1):
+    if H[i-1] - H[i] >= 2:
         ans = False
         break
-    elif H[i] - H[i+1] == 1:
-        if prev:
-            ans = False
-            break
-        else:
-            prev = True
-    else:
-        prev = False
+    elif H[i-1] - H[i] == 1:
+        H[i-1] -= 1
 
 if ans:
     print("Yes")
